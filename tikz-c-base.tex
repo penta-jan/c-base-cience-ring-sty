@@ -1,0 +1,83 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{xcolor}
+\begin{document}
+%% c-base logo nachgebaut von penta.
+%% alles nur geschätze Winkel und Abstände :/
+%% um den code zu verstehen, einfach mal einzelne Teile auskommentieren und wieder einkommentieren (ctrl-#) und dann mal \draw[white] durch \draw[red] ersetzen, dann sieht man, was was ist.
+%% viel Spaß damit.
+\tikzset{
+  pics/carc/.style args={#1:#2:#3}{
+    code={
+      \draw[pic actions] (#1:#3) arc(#1:#2:#3);
+    }
+  }
+}
+\definecolor{eins}{HTML}{e7e7e8}   %% Ring 1 "core"     - weiß - Mittelpunkt, Ring um Mittelpunkt
+\definecolor{zwei}{HTML}{ed1c24}   %% Ring 2 "com"      - rot -  "Fenster" innen
+\definecolor{drei}{HTML}{fbad18}   %% Ring 3  "culture" - orange - fünf Module, quasi invertiert
+\definecolor{vier}{HTML}{74c043}   %% Ring 4  "creativ" - grün -  vier Module
+\definecolor{fuenf}{HTML}{0089d0}  %% Ring 5 "cience"  - cyan (blau) - drei Module mit "Strich"
+\definecolor{sechs}{HTML}{11357e}  %% Ring 6 "carbon" -  indigo - viele "Fenster" außen
+\definecolor{sieben}{HTML}{000000} %% Ring 7 "clamp" -  schwarz, c-förmig
+\definecolor{cbase}{HTML}{222222}  %% Körper der Raumstation
+
+
+    \begin{tikzpicture}%
+        \def\radi{10}%     
+
+        %% äußerer Radius
+        \filldraw[sieben] (0:0) circle (\radi-0.3);  %% CLAMP - schwarz
+
+        \filldraw[cbase] (0:0) circle (\radi-1.52);
+        
+        % was wegnehmen / weiß übermalen
+        \draw[white, line width=1.36cm] (0:0) pic{carc=-55:90:\radi-0.9}; 
+
+        %% clamp - viele kleine Fenster
+        \foreach [count=\i] \ii in {%
+        70,74,78,100,
+        114,118,...,170,
+        182,186,
+        202,206,...,250,
+        266,270,...,304}
+            \draw[sechs, line width=0.5cm] (0:0) pic{carc=\ii:\ii-2:\radi-2}; 
+        
+        \draw[white, line width=3.05cm] (0:0) pic{carc=50:-55:\radi-3};
+        
+        \draw[white, line width=2cm] (0:0) pic{carc=-90:0:\radi-3.5};
+
+  
+        \draw[fuenf, line width=1.8cm] (0:0) 
+            pic{carc=82:135:\radi-3.5};
+        \draw[fuenf, line width=1.8cm] (0:0) 
+            pic{carc=65:74:\radi-3.5};
+        \draw[fuenf, line width=1.8cm] (0:0) 
+            pic{carc=53:62:\radi-3.5};
+            
+        \draw[cbase, line width=0.4cm] (0:0) 
+            pic{carc=110:135:\radi-3.3};
+
+        \foreach [count=\i] \ii in {1,2,3,4}
+            \draw[vier, line width=1.5cm] (0:0) 
+            pic{carc=90*\i:90*\i+45:\radi-5.5};
+
+
+        \filldraw[drei] (0:0) circle (\radi-6.5);
+        
+        \foreach [count=\i] \ii in {1,2,3,4,5}
+            \draw[cbase, line width=0.7cm] (0:0) 
+            pic{carc=72*\i+27:72*\i+36+27:\radi-7};
+
+        \filldraw[cbase] (0:0) circle (\radi-7.5);
+
+        \foreach [count=\i] \ii in {160,172,...,490}
+            \draw[zwei, line width=0.4cm] (0:0) pic{carc=\ii:\ii-8:\radi-8};   
+        
+        \filldraw[eins] (0:0) circle (\radi-8.5);
+        \filldraw[black] (0:0) circle (\radi-8.8);
+        \filldraw[eins] (0:0) circle (\radi-9.8);
+     
+    \end{tikzpicture}
+\end{document}

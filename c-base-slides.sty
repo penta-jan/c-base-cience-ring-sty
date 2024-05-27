@@ -1,0 +1,153 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{c-base-slides}[2024/02/14 c-base--Slides JS]
+
+
+\definecolor{eins}{HTML}{e7e7e8}   %% Ring 1 "core"     - weiß - Mittelpunkt, Ring um Mittelpunkt
+\definecolor{zwei}{HTML}{ed1c24}   %% Ring 2 "com"      - rot -  "Fenster" innen
+\definecolor{drei}{HTML}{fbad18}   %% Ring 3  "culture" - orange - fünf Module, quasi invertiert
+\definecolor{vier}{HTML}{74c043}   %% Ring 4  "creactive" - grün -  vier Module
+\definecolor{fuenf}{HTML}{0089d0}  %% Ring 5 "cience"  - cyan (blau) - drei Module mit "Strich"
+\definecolor{sechs}{HTML}{11357e}  %% Ring 6 "carbon" -  indigo - viele "Fenster" außen
+\definecolor{sieben}{HTML}{000000} %% Ring 7 "clamp" -  schwarz, c-förmig
+\definecolor{cbase}{HTML}{222222}  %% Körper der Raumstation
+
+\definecolor{c-base-blau}{HTML}{0089d0} %% cience
+\definecolor{c-base-tuerk}{HTML}{11357e} %% clamp
+\definecolor{c-base-gruen}{HTML}{74c043}  %% creactive
+\definecolor{c-base-hellgruen}{HTML}{0089d0} %% cience
+\definecolor{c-base-gelb}{HTML}{e7e7e8} %% core
+\definecolor{c-base-orange}{HTML}{fbad18} %% culture
+\definecolor{c-base-rot}{HTML}{ed1c24} %% com
+\definecolor{c-base-violett}{HTML}{11357e} %% carbon
+
+\usetheme{AnnArbor}
+\usecolortheme{beaver}
+
+\setbeamercolor{title}{fg=c-base-gelb}
+\setbeamercolor{titlelike}{parent=structure,bg=c-base-hellgruen}
+\setbeamercolor{sidebar}{bg=c-base-gruen}
+\setbeamercolor{frametitle}{fg=c-base-blau}
+\setbeamercolor{section in head/foot}{bg=c-base-hellgruen}
+
+\addtobeamertemplate{footnote}{\vspace{-6pt}\advance\hsize-0.5cm}{\vspace{6pt}}
+\makeatletter
+% Alternative A: footnote rule
+\renewcommand*{\footnoterule}{\kern -3pt \hrule \@width 2in \kern 8.6pt}
+% Alternative B: no footnote rule
+% \renewcommand*{\footnoterule}{\kern 6pt}
+\makeatother
+
+\RequirePackage{standalone}
+
+\RequirePackage{booktabs}
+
+
+\RequirePackage{array}
+\RequirePackage[version=4]{mhchem}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}
+\RequirePackage{multirow}
+\RequirePackage{rotating}  % for rotated cells in tabulars
+\newcommand\given{\;\middle|\;}
+
+% \RequirePackage[utf8]{inputenc}
+
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.symbols}
+\usetikzlibrary{positioning,intersections}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{calc,matrix,decorations.markings,decorations.pathreplacing}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols}
+\setbeamercolor{background canvas}{bg=yellow!10}
+    
+\RequirePackage{tikzpeople}
+
+\RequirePackage{adjustbox}
+\RequirePackage{pgfgantt}
+\RequirePackage{xcolor}
+
+\RequirePackage[edges]{forest}
+
+
+\newcommand{\noun}[1]{\textsc{#1}}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}\insertshorttitle\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+% \AtBeginSection[]
+% {
+%   \begin{frame}
+%     \frametitle{Table of Contents}
+%     \tableofcontents[currentsection]
+%   \end{frame}
+% }
+
+
+\RequirePackage{xltxtra}
+
+\RequirePackage{fontspec}
+
+\RequirePackage{biblatex}
+\addbibresource{literature.bib}
+
+
+\newcommand{\ceva}[1]{ % Leerzeichen notwendig
+    {\fontspec{[ceva-c2.ttf]}#1}%
+}
+\newcommand{\cevapic}[1]{ % Leerzeichen notwendig
+    {\fontspec{[ceva-c2.ttf]}#1}%
+}
+\newcommand{\cevain}[1]{ % Leerzeichen notwendig!
+    {\fontspec{[ceva-c2.ttf]}#1} $\mid$ \emph{#1}%
+    \index{{\fontspec{[ceva-c2.ttf]}#1} $\mid$ #1}%
+}
+
+\newcommand{\ring}[1]{ % Leerzeichen notwendig
+    {\fontspec{[ceva-c2.ttf]}#1}%
+}
+
+\newcommand{\twofonts}[2][]{
+\begin{quote} 
+    {\fontspec{[ceva-c2.ttf]}#2}
+    \\\vspace{2ex}
+    #2
+    \\\vspace{2ex}
+    \hfill#1
+\end{quote}
+}
+
+\newcommand{\linek}[2][]{
+\begin{quote} 
+    {\fontspec{[linek.ttf]}#2}
+    \par
+    {\fontspec{[ceva-c2.ttf]}#2}
+    \par
+    #2\hfill#1
+\end{quote}
+}
+
+\newcommand{\linekin}[1]{ % Leerzeichen notwendig!
+    {\fontspec{[linek.ttf]}#1} $\cdot$ %
+    % {\fontspec{[ceva-c2.ttf]}#1} $\mid$
+    \emph{#1}%
+    \index{{\fontspec{[linek.ttf]}#1} 
+    % $\cdot$ {\fontspec{[ceva-c2.ttf]}#1} 
+    $\mid$ #1}%
+}
+\newcommand{\linekonly}[1]{ % Leerzeichen notwendig!
+    {\fontspec{[linek.ttf]}#1}%
+}
+
+
+\newenvironment{newstuff}
+    {\par\bigskip\hrule}
+    {\hfill{\footnotesize{[p]}}
+    \par
+    \medskip    
+    \hrule
+    \clearpage
+    }

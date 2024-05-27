@@ -1,0 +1,143 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{c-base-cience-ring}[2024/05/27 c-base-cience-ring paper JS]
+
+%% requires XeLaTeX and fonts ceva-c2.ttf and linek.ttf.
+
+\RequirePackage{fancyhdr}
+\RequirePackage{booktabs}
+\RequirePackage{microtype}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}
+\RequirePackage{nicefrac}
+\RequirePackage{icomma}
+\RequirePackage{tabularx}
+\RequirePackage{svg}
+\RequirePackage{subcaption}
+\RequirePackage{mdframed}
+\RequirePackage{subcaption}
+\RequirePackage{imakeidx}
+\makeindex
+\RequirePackage{xltxtra}
+
+% \usepackage[firstpageonly=true]{draftwatermark}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+\RequirePackage{standalone}
+\RequirePackage{tikz}
+\usetikzlibrary{decorations, decorations.text,}
+
+\RequirePackage{pst-solides3d}
+
+\usepackage[hidelinks]{hyperref}
+% \hypersetup{
+%     pdftitle={Die 7 Ringe der c-base},
+%     pdfsubject={Eine interpretative Exegese der ältesten Überlieferung im Lichte neuer Ausgrabungen und Schlussfolgerungen zur Topologie der Station vor ihrer Faltung},
+%     pdfauthor={c-base cience ring, penta},
+%     pdfkeywords={c-base} 
+%     }
+
+\RequirePackage{cleveref}
+
+
+\RequirePackage{fontspec}
+% % \setmainfont{ceva-c2.ttf}
+\setmainfont{Alegreya Sans}
+
+\RequirePackage{lettrine}
+ 
+\RequirePackage{biblatex}
+\addbibresource{literature.bib}
+
+\definecolor{eins}{HTML}{e7e7e8}   %% Ring 1 "core"     - weiß - Mittelpunkt, Ring um Mittelpunkt
+\definecolor{zwei}{HTML}{ed1c24}   %% Ring 2 "com"      - rot -  "Fenster" innen
+\definecolor{drei}{HTML}{fbad18}   %% Ring 3  "culture" - orange - fünf Module, quasi invertiert
+\definecolor{vier}{HTML}{74c043}   %% Ring 4  "creactive" - grün -  vier Module
+\definecolor{fuenf}{HTML}{0089d0}  %% Ring 5 "cience"  - cyan (blau) - drei Module mit "Strich"
+\definecolor{sechs}{HTML}{11357e}  %% Ring 6 "carbon" -  indigo - viele "Fenster" außen
+\definecolor{sieben}{HTML}{000000} %% Ring 7 "clamp" -  schwarz, c-förmig
+\definecolor{cbase}{HTML}{222222}  %% Körper der Raumstation
+
+% \definecolor{cevacol}{HTML}{4B0082}  %% indigo pur -  Färbung der Begriffe in ceva und linear konstrukt
+% \definecolor{cevacol}{HTML}{0089d0}  %% cyan (blau) -  Färbung der Begriffe in ceva und linear construkt
+\definecolor{cevacol}{HTML}{000000}  %% Färbung der Begriffe in ceva und linear construkt
+
+\newcommand{\noun}[1]{\textsc{#1}}
+
+\newcommand{\Hrule}[1][.]{%
+\begingroup\color{#1}%
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}
+        \filldraw[draw=black]  (0,0) rectangle (10,0.2);
+    \end{tikzpicture}
+    }%
+\endgroup%
+}
+
+\newcommand{\Hrulek}[1][.]{%  used in table
+\begingroup\color{#1}%
+    \resizebox{3ex}{!}{
+    \begin{tikzpicture}
+        \filldraw[draw=black]  (0,0) rectangle (2,1);
+    \end{tikzpicture}
+    }%
+\endgroup%
+}
+
+\newcommand{\ceva}[1]{ % Leerzeichen notwendig
+    {\color{cevacol}\fontspec{[ceva-c2.ttf]}#1}%
+}
+\newcommand{\cevapic}[1]{ % Leerzeichen notwendig
+    {\fontspec{[ceva-c2.ttf]}#1}%
+}
+\newcommand{\cevain}[1]{ % Leerzeichen notwendig!
+    {\color{cevacol}\fontspec{[ceva-c2.ttf]}#1} $\mid$ \emph{#1}%
+    \index{{\color{cevacol}\fontspec{[ceva-c2.ttf]}#1} $\mid$ #1}%
+}
+
+\newcommand{\ring}[1]{ % Leerzeichen notwendig
+    {\color{cevacol}\fontspec{[ceva-c2.ttf]}#1}%
+}
+
+\newcommand{\twofonts}[2][]{
+\begin{quote} 
+    {\color{cevacol}\fontspec{[ceva-c2.ttf]}#2}
+    \par
+    #2\hfill#1
+\end{quote}
+}
+
+\newcommand{\linek}[2][]{
+\begin{quote} 
+    {\color{cevacol}\fontspec{[linek.ttf]}#2}
+    \par
+    {\color{cevacol}\fontspec{[ceva-c2.ttf]}#2}
+    \par
+    #2\hfill#1
+\end{quote}
+}
+
+\newcommand{\linekin}[1]{ % Leerzeichen notwendig!
+    {\color{cevacol}\fontspec{[linek.ttf]}#1} $\cdot$ %
+    % {\fontspec{[ceva-c2.ttf]}#1} $\mid$
+    \emph{#1}%
+    \index{{\color{cevacol}\fontspec{[linek.ttf]}#1} 
+    % $\cdot$ {\fontspec{[ceva-c2.ttf]}#1} 
+    $\mid$ #1}%
+}
+\newcommand{\linekonly}[1]{ % Leerzeichen notwendig!
+    {\color{cevacol}\fontspec{[linek.ttf]}#1}%
+}
+
+
+\newenvironment{newstuff}
+    {\par\bigskip\hrule}
+    {\hfill{\footnotesize{[p]}}
+    \par
+    \medskip    
+    \hrule
+    \clearpage
+    }

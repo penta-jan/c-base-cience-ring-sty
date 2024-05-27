@@ -1,0 +1,138 @@
+\documentclass[14pt,ngerman]{extarticle}  %% document requires XeLaTex.
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+\usepackage{c-base-cience-ring}
+
+
+\title{
+    {c-base-cience-ring.sty} \\
+    Makros für Papers im\\ \cevain{c-base cience ring}
+    }
+
+\author{
+    \resizebox{8cm}{!}{\input{tikz-c-base}}\\\smallskip\\\cevain{ccr}\\
+    % \ceva{c-base cience ring}\\ 
+    c-base cience ring\\\smallskip\\
+    \cevain{penta}\\ \makeatletter {\texttt{penta@c-base.org}}\makeatother
+    }
+
+
+\date{27. Mai 2024}
+
+\begin{document}
+
+\maketitle
+
+\setlength{\parskip}{2ex}
+\setlength{\parindent}{0ex}
+ 
+\section{Requirements}
+
+Package must be used with \XeLaTeX\ and the fonts \verb|ceva-c2.ttf| and \verb|linek.ttf| must be present. You also need
+
+\verb|\documentclass{extarticle}| or \verb|\documentclass{extreport}|. 
+
+Also, for correct display of \linekin{linek}, you must have a file calle \verb|latexmkrc| without file extension (!) that contains the line:
+
+\verb|$xdvipdfmx = "xdvipdfmx -E -o %D %O %S";|
+
+Once this is all provided, load \verb|\usepackage{c-base-cience-ring}| and use the commands described below.
+
+This package loads many useful packages, such as \verb|booktab|, \verb|tikz| and many others. You may want to look at the code for details. You may also want to set up \verb|\hypersetup| for your PDF metadata.
+
+To create a bibliography, the package loads
+
+\verb|\usepackage{biblatex}| and \verb|\addbibresource{literature.bib}|
+
+So please upload / name your bibliography accordingly.
+
+\section{\cevain{ceva}}
+
+
+\verb|\cevain{foo}| prints ceva and latin: \cevain{foo} and also creates an index entry.
+
+\verb|\ceva{foo}| prints only \ceva{foo} and does not provide an index entry.
+
+The color of \ceva{ceva} can be defined by
+
+\verb|\definecolor{cevacol}{HTML}{000000}| 
+
+The standard is black.
+
+\verb|\cevapic{foo}| should be used within TikZ pictures, since they may not have a defined color \verb|cevacol|.
+
+\verb|\twofonts{my lengthy quote}| typesets longer paragraphs in both \ceva{ceva} and \emph{cursive}. Optional parameter is the source: \verb|\twofonts[\cite{mybibentry}]{foo}| Note that \verb|cite| can then not have an opitonal argument for a page number (sadly), so if you need that, you must include that information (if needed) directly in the optional argument. 
+
+\twofonts[S.1~\cite{adams1981restaurant}]{In the beginning the Universe was created. This has made a lot of people very angry and been widely regarded as a bad move.}
+
+\section{\linekin{Linek}}
+
+Similarly to \verb|\twofonts|, use \verb|\linek{foo}|, which spells in three typefaces:
+\linek[citation here!]{foo} 
+while
+
+\verb|\linekin{foo}| produces \linekin{foo}
+
+and
+
+\verb|\linekonly{linek}| which produces only 
+\linekonly{linek}.
+
+\section{Using this for slides}
+
+You can use this for \verb|beamer|, but then you must get rid of the \verb|makeidx|-package sice \verb|beamer| does not support indexation. I have knocked together a stylesheet \verb|c-base-slides.sty| which should do the job. Holler me for more tipps.
+
+\section{Colours}
+
+I define colours in the way of the \cevain{abtöner}. They are stored in \verb|eins|, \verb|zwei| and so forth for all the rings (German numerals for the \cevain{rings}). Use this, or override or change if you are a \cevain{purist}. {\color{zwei} This is colour zwei}, while {\color{drei} this is color drei}.
+
+\begingroup %% Ringe
+
+    %% In this group I had the chapters on the rings, so the section was renamed to ring etc.; I don't think you need this, but if you want, you can of course use this.
+    
+    \renewcommand{\thesection}{\arabic{section}.~Ring}
+
+    \newcommand{\ringcolor}[1]{
+        \begin{tikzpicture}
+        \filldraw[fill=#1]  (0,0) rectangle (5ex,1ex);
+        \end{tikzpicture}
+    }
+    
+    \newcommand{\csection}[2][.]{
+        \section{\hspace{2ex}#2\hspace{2ex} 
+            {\ceva{(#2)}}
+        }
+       \index{{\fontspec{[ceva-c2.ttf]}#2}$\mid$ #2}
+        \Hrule[#1]
+        \fancyhead[RO]{\thesection~
+            \ringcolor{#1}~#2~\ceva{#2}
+        }
+    }
+
+
+   
+\endgroup
+\clearpage
+
+% \renewcommand\indexname{Fachindex}
+\indexprologue{\noindent Index entries have been created whenever \texttt{cevain}  or \texttt{linekin} was used.}
+
+\fancyhead[RO]{Fachindex}\addcontentsline{toc}{chapter}{Fachindex}\label{sec:index}
+\printindex
+
+\clearpage
+
+  
+\fancyhead[LO]{Literatur}\label{sec:literatur}
+\fancyhead[RO]{Literatur}\addcontentsline{toc}{chapter}{Literatur}
+\printbibliography
+
+ 
+
+\end{document}

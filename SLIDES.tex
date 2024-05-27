@@ -1,0 +1,59 @@
+\documentclass[t,dvipsnames]{beamer}
+\usepackage[ngerman]{babel}
+
+\usepackage{c-base-slides}
+
+
+
+
+\title{beamer template for \ceva{c-base}}
+\subtitle{foo foo foo}
+\author{\ceva{c-base cience ring}\\\ceva{\&}\\\ceva{penta - ms. cience}}% 
+\date{May 2024}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Image}
+    \resizebox{!}{0.8\textheight}{\input{tikz-c-base}}
+\end{frame}
+
+\begin{frame}{Requirements}
+    \begin{itemize}
+        \item \XeLaTeX, \texttt{fontspec}
+        \item \texttt{ceva-c2.ttf}
+        \item for \linekin{linek}: also \texttt{linek.ttf}
+        \item add a file latexmkrc with
+        \item[]  \texttt{\$xdvipdfmx = "xdvipdfmx -E -o \%D \%O \%S";}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The Story so far}
+    \twofonts[S.1~\cite{adams1981restaurant}]{In the beginning the Universe was created. This has made a lot of people very angry and been widely regarded as a bad move.}
+\end{frame}
+
+\begin{frame}{\cevain{forc\_ungsvorhaben}}
+    \begin{itemize}
+        \item Rekursion auf älteste Überlieferung / \cevain{c\_rift}
+        \item Schlussfolgerungen für Topologie der \ceva{c-tation}
+        \item Veröffentlichung \ceva{ccr} \cite{penta2024}
+        \item Leseexemplar liegt aus
+        \item Further reading: \cite{adams1981restaurant}
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Die \ceva{Lösung}}
+    \resizebox{\textwidth}{!}{
+    \fontspec{Bebas Neue}42
+    }
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Literature}
+    % \nocite{*}
+    \printbibliography
+\end{frame}
+
+\end{document}
