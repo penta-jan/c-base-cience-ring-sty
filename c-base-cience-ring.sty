@@ -87,6 +87,19 @@
 \endgroup%
 }
 
+    \makeatletter  %% for vertical typesetting
+        \protected\def\vvv#1{\leavevmode\bgroup\vbox\bgroup\xvvv#1\relax}
+        \def\xvvv{\afterassignment\xxvvv\let\tmp= }
+        \def\xxvvv{%
+        \ifx\tmp\@sptoken\egroup\ \vbox\bgroup\let\next\xvvv
+        \else\ifx\tmp\relax\egroup\egroup\let\next\relax
+        \else
+        %\hbox{\tmp}%original
+        \hbox to 1.1em{\hfill\tmp\hfill}% centred
+        \let\next\xvvv\fi\fi
+        \next}
+    \makeatother
+
 \newcommand{\ceva}[1]{ % Leerzeichen notwendig
     {\color{cevacol}\fontspec{[ceva-c2.ttf]}#1}%
 }
@@ -96,6 +109,15 @@
 \newcommand{\cevain}[1]{ % Leerzeichen notwendig!
     {\color{cevacol}\fontspec{[ceva-c2.ttf]}#1} $\mid$ \emph{#1}%
     \index{{\color{cevacol}\fontspec{[ceva-c2.ttf]}#1} $\mid$ #1}%
+}
+
+\newcommand{\cevavert}[2][]{%
+        \begin{quote}
+        \fbox{%
+            {\fontspec{[ceva-c2.ttf]}\vvv{#2}}%
+        }\hfill#1
+        \end{quote}
+    \vspace{2ex}%
 }
 
 \newcommand{\ring}[1]{ % Leerzeichen notwendig
@@ -133,21 +155,7 @@
 }
 
 
-    \makeatletter  %% for vertical linek
-        \protected\def\vvv#1{\leavevmode\bgroup\vbox\bgroup\xvvv#1\relax}
-        
-        \def\xvvv{\afterassignment\xxvvv\let\tmp= }
-        
-        \def\xxvvv{%
-        \ifx\tmp\@sptoken\egroup\ \vbox\bgroup\let\next\xvvv
-        \else\ifx\tmp\relax\egroup\egroup\let\next\relax
-        \else
-        %\hbox{\tmp}%original
-        \hbox to 1.1em{\hfill\tmp\hfill}% centred
-        \let\next\xvvv\fi\fi
-        \next}
-    
-    \makeatother
+
     
 \newcommand{\linekvert}[2][]{%
         \begin{quote}
